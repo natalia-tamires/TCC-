@@ -83,6 +83,25 @@ section {
   content: "/";
 }
 @media (max-width: 768px) {
+  .contact .contact-about {
+    text-align: center;
+  }
+
+  .info div{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .info div i{
+    display: none;
+  }
+
+  .info div p{
+    padding: 0 !important;
+    margin: 6px 0;
+  }
+
   .breadcrumbs .d-flex {
     display: block !important;
   }
