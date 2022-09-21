@@ -26,10 +26,10 @@ submit.addEventListener('click', async ()=>{
 })
 
 async function addMessage(){
-    const nome = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const assunto = document.getElementById('subject').value;
-    const mensagem = document.getElementById('message').value;
+    const nome = document.getElementById('name');
+    const email = document.getElementById('email');
+    const assunto = document.getElementById('subject');
+    const mensagem = document.getElementById('message');
 
     try {
         if(!nome || !email || !assunto || !mensagem){
@@ -37,29 +37,28 @@ async function addMessage(){
         }
 
         const message = filterMessage({ nome, email, assunto, mensagem });
-        cleanInputs({ nome, email, assunto, mensagem });
-
         const docRef = await addDoc(collection(db, "Mensagens"), message);
-
 
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error(e.message);
-    } 
+    } finally {
+        cleanInputs({ nome, email, assunto, mensagem });
+    }
 }
 
 function filterMessage({nome, email, assunto, mensagem}) {
     return {
-        nome: nome.trim(),
-        email: email.trim(),
-        assunto: assunto.trim(),
-        mensagem: mensagem.trim()
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        assunto: assunto.value.trim(),
+        mensagem: mensagem.value.trim()
     }
 }
 
 function cleanInputs ({nome, email, assunto, mensagem}) {
-    nome = '';
-    email = '';
+    nome.value = '';
+    email.value = '';
     mensagem.value = '';
     assunto.value = '';
 }
